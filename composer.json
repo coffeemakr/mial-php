@@ -1,0 +1,19 @@
+{
+    "name": "coffeemakr/mial-php",
+    "description": "Check for mail address spelling errors",
+    "type": "library",
+    "version": "0.1",
+    "autoload": {
+        "psr-4": {
+            "Coffeemakr\\Mial\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12"
+    },
+    "require": {
+        "algo26-matthias/idna-convert": "^4.2",
+        "php": ">=8.2"
+    }
+}
