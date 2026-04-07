@@ -6,7 +6,10 @@ namespace Coffeemakr\Mial;
 
 class TopLevelDomains
 {
-    static private $tlds = [
+    /**
+     * @var string[]
+     */
+    static private array $tlds = [
         // BEGIN GENERATED TLD LIST
         "aaa",
         "aarp",
