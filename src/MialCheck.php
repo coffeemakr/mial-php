@@ -15,17 +15,15 @@ use Coffeemakr\Mial\Exception\InvalidTopLevelDomainException;
 class MialCheck
 {
 
-    private string $local_part;
-    private string $host;
+    private readonly string $local_part;
+    private readonly string $host;
+    private readonly string $original_mail;
     private ?\Exception $addressException;
 
 
     public function __construct(#[\SensitiveParameter] string $untrusted_email)
     {
-        $this->host = '';
-        $this->local_part = '';
-        $this->addressException = new \RuntimeException("Check not completed");
-
+        $this->original_mail = $untrusted_email;
 
         $parts = [];
         if ($untrusted_email) {
@@ -58,8 +56,6 @@ class MialCheck
         $filtered_mail = filter_var($local_part . '@' . $host, FILTER_VALIDATE_EMAIL);
         if (!$filtered_mail) {
             $this->addressException = new InvalidLocalPartException("Invalid local part");
-        } else {
-            echo $filtered_mail;
         }
 
         $host_parts = explode('.', $host);
@@ -83,6 +79,12 @@ class MialCheck
     public function isValid(): bool
     {
         return $this->addressException === NULL;
+    }
+
+    public function isNormalized(): bool
+    {
+        if (!$this->isValid()) return false;
+        return $this->original_mail === $this->getAddress();
     }
 
     public function getError(): \Exception|null {
