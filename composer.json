@@ -15,6 +15,6 @@
     },
     "require": {
         "algo26-matthias/idna-convert": "^4.2",
-        "php": ">=8.2"
+        "php": ">=8.4"
     }
 }
